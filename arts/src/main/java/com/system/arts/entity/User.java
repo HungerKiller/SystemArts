@@ -1,11 +1,6 @@
 package com.system.arts.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Users")
@@ -29,11 +24,9 @@ public class User {
     @Column(name = "is_admin", nullable = false)
     private boolean isAdmin;
     
-    public User() {
-    }
+    public User() {}
     
-    public User(int id, String username, String password, String email, Integer age, boolean isAdmin) {
-        this.id = id;
+    public User(String username, String password, String email, Integer age, boolean isAdmin) {
         this.username = username;
         this.password = password;
         this.email = email;
