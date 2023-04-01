@@ -1,4 +1,4 @@
-package com.system.arts.models;
+package com.system.arts.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
