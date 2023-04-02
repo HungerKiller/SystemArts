@@ -1,5 +1,7 @@
 package com.system.arts.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -24,6 +26,15 @@ public class User {
     @Column(name = "is_admin", nullable = false)
     private boolean isAdmin;
     
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
+	private List<Resource> resources;
+
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
+	private List<Comment> comments;
+
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
+	private List<UserFavorite> userFavorites;
+
     public User() {}
     
     public User(String username, String password, String email, Integer age, boolean isAdmin) {

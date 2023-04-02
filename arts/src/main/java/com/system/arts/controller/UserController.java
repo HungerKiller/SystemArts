@@ -18,7 +18,7 @@ import com.system.arts.entity.User;
 import com.system.arts.service.UserService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/name/{name}")
+    @GetMapping("/byName/{name}")
     public ResponseEntity<User> getUserByName(@PathVariable String name) {
         User user = userService.getUserByName(name);
         return ResponseEntity.ok(user);

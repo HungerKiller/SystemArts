@@ -1,5 +1,7 @@
 package com.system.arts.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -15,6 +17,9 @@ public class ResourceType {
     @Column(name = "description")
     private String description;
     
+    @OneToMany(mappedBy = "resourceType", cascade = {CascadeType.REMOVE})
+	private List<Resource> resources;
+
     public ResourceType() {}
     
     public ResourceType(String name, String description) {

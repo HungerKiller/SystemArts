@@ -16,13 +16,13 @@ public class UserFavoriteController {
     @Autowired
     private UserFavoriteService userFavoriteService;
 
-    @GetMapping("/byUserId/{userId}")
+    @GetMapping("/byUser/{userId}")
     public ResponseEntity<List<UserFavorite>> getUserFavoritesByUserId(@PathVariable int userId) {
         List<UserFavorite> userFavorites = userFavoriteService.getUserFavoritesByUserId(userId);
         return new ResponseEntity<>(userFavorites, HttpStatus.OK);
     }
 
-    @GetMapping("/byResourceId/{resourceId}")
+    @GetMapping("/byResource/{resourceId}")
     public ResponseEntity<List<UserFavorite>> getUserFavoritesByResourceId(@PathVariable int resourceId) {
         List<UserFavorite> userFavorites = userFavoriteService.getUserFavoritesByResourceId(resourceId);
         return new ResponseEntity<>(userFavorites, HttpStatus.OK);
@@ -35,8 +35,8 @@ public class UserFavoriteController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> deleteUserFavorite(@RequestParam int userId, @RequestParam int resourceId) {
-        userFavoriteService.deleteUserFavorite(userId, resourceId);
+    public ResponseEntity<Void> deleteUserFavorite(@RequestParam int id) {
+        userFavoriteService.deleteUserFavorite(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

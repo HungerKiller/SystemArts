@@ -10,26 +10,15 @@ public class UserFavorite {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "user_id")
-    private int userId;
-
-    @Column(name = "resource_id")
-    private int resourceId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_user_id"))
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resource_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "resource_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_resource_id"))
     private Resource resource;
 
     public UserFavorite() {}
-
-    public UserFavorite(int userId, int resourceId) {
-        this.userId = userId;
-        this.resourceId = resourceId;
-    }
 
     public int getId() {
         return id;
@@ -37,22 +26,6 @@ public class UserFavorite {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getResourceId() {
-        return resourceId;
-    }
-
-    public void setResourceId(int resourceId) {
-        this.resourceId = resourceId;
     }
 
     public User getUser() {

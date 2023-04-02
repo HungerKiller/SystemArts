@@ -1,6 +1,8 @@
 package com.system.arts.entity;
 
 import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -11,12 +13,6 @@ public class Resource {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-
-    @Column(name = "user_id")
-    private int userId;
-
-    @Column(name = "resource_type_id")
-    private int resourceTypeId;
 
     @Column(name = "title")
     private String title;
@@ -36,19 +32,34 @@ public class Resource {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_user_id"))
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resource_type_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "resource_type_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_resource_type_id"))
     private ResourceType resourceType;
+
+    @OneToMany(mappedBy = "resource", cascade = {CascadeType.REMOVE})
+	private List<Comment> comments;
+
+    @OneToMany(mappedBy = "resource", cascade = {CascadeType.REMOVE})
+	private List<UserFavorite> userFavorites;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Timestamp(new Date().getTime());
+        updatedAt = createdAt;
+    }
+    
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Timestamp(new Date().getTime());
+    }
 
     public Resource() {}
 
-    public Resource(int userId, int resourceTypeId, String title, String address, String description, double price) {
-        this.userId = userId;
-        this.resourceTypeId = resourceTypeId;
+    public Resource(String title, String address, String description, double price) {
         this.title = title;
         this.address = address;
         this.description = description;
@@ -61,22 +72,6 @@ public class Resource {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getResourceTypeId() {
-        return resourceTypeId;
-    }
-
-    public void setResourceTypeId(int resourceTypeId) {
-        this.resourceTypeId = resourceTypeId;
     }
 
     public String getTitle() {

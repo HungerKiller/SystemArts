@@ -13,12 +13,6 @@ public class Comment {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "user_id")
-    private int userId;
-
-    @Column(name = "resource_id")
-    private int resourceId;
-
     @Column(name = "content")
     private String content;
 
@@ -28,19 +22,28 @@ public class Comment {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_user_id"))
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resource_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "resource_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_resource_id"))
     private Resource resource;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Timestamp(new Date().getTime());
+        updatedAt = createdAt;
+    }
+    
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Timestamp(new Date().getTime());
+    }
 
     public Comment() {}
 
-    public Comment(int userId, int resourceId, String content) {
-        this.userId = userId;
-        this.resourceId = resourceId;
+    public Comment(String content) {
         this.content = content;
     }
 
@@ -50,22 +53,6 @@ public class Comment {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getResourceId() {
-        return resourceId;
-    }
-
-    public void setResourceId(int resourceId) {
-        this.resourceId = resourceId;
     }
 
     public String getContent() {

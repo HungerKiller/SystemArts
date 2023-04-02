@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.system.arts.entity.Resource;
+import com.system.arts.entity.ResourceType;
+import com.system.arts.entity.User;
 import com.system.arts.repository.ResourceRepository;
 
 @Service
@@ -40,10 +42,8 @@ public class ResourceService {
             existingResource.setAddress(updatedResource.getAddress());
             existingResource.setDescription(updatedResource.getDescription());
             existingResource.setPrice(updatedResource.getPrice());
-            // existingResource.setCreatedAt(updatedResource.getCreatedAt());
-            // existingResource.setUpdatedAt(updatedResource.getUpdatedAt());
-            existingResource.setUserId(updatedResource.getUserId());
-            existingResource.setResourceTypeId(updatedResource.getResourceTypeId());
+            existingResource.setUser(updatedResource.getUser());
+            existingResource.setResourceType(updatedResource.getResourceType());
             return resourceRepository.save(existingResource);
         } else {
             throw new IllegalArgumentException("Resource not found with id " + updatedResource.getId());

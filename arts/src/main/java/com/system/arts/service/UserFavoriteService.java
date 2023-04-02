@@ -1,6 +1,7 @@
 package com.system.arts.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,11 +43,21 @@ public class UserFavoriteService {
             throw new IllegalArgumentException("Resource not found with id " + resourceId);
         }
 
-        UserFavorite userFavorite = new UserFavorite(userId, resourceId);
+        Optional<UserFavorite> userFavoriteOptional = userFavoriteRepository.findByUserIdAndResourceId(userId, resourceId);
+
+        if (userFavoriteOptional.isPresent()) {
+            throw new IllegalArgumentException("UserFavorite already exists for user " + userId + " and resource " + resourceId);
+        }
+
+        UserFavorite userFavorite = new UserFavorite();
+        userFavorite.setUser(user);
+        userFavorite.setResource(resource);
         userFavoriteRepository.save(userFavorite);
     }
-
-    public void deleteUserFavorite(int userId, int resourceId) {
-        userFavoriteRepository.deleteByUserIdAndResourceId(userId, resourceId);
+    
+    public void deleteUserFavorite(int id) {
+        UserFavorite userFavorite = userFavoriteRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("UserFavorite not found with id " + id));
+        userFavoriteRepository.delete(userFavorite);
     }
 }

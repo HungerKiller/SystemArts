@@ -16,7 +16,7 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @GetMapping("/byResourceId/{resourceId}")
+    @GetMapping("/byResource/{resourceId}")
     public ResponseEntity<List<Comment>> getCommentsByResourceId(@PathVariable int resourceId) {
         List<Comment> comments = commentService.getCommentsByResourceId(resourceId);
         return new ResponseEntity<>(comments, HttpStatus.OK);

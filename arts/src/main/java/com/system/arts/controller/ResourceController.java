@@ -29,7 +29,7 @@ public class ResourceController {
         return ResponseEntity.ok(resource);
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/byUser/{userId}")
     public ResponseEntity<List<Resource>> getResourcesByUserId(@PathVariable int userId) {
         List<Resource> resources = resourceService.getResourcesByUserId(userId);
         return ResponseEntity.ok(resources);

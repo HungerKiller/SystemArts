@@ -1,6 +1,7 @@
 package com.system.arts.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,5 +15,5 @@ public interface UserFavoriteRepository extends JpaRepository<UserFavorite, Inte
 
     List<UserFavorite> findByResourceId(int resourceId);
 
-    void deleteByUserIdAndResourceId(int userId, int resourceId);
+    Optional<UserFavorite> findByUserIdAndResourceId(int userId, int resourceId);
 }
