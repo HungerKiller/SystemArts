@@ -23,8 +23,8 @@ public class User {
     @Column(name = "age")
     private Integer age;
     
-    @Column(name = "is_admin", nullable = false)
-    private boolean isAdmin;
+    @Column(name = "roleType", nullable = false)
+    private RoleType roleType;
     
     @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
 	private List<Resource> resources;
@@ -34,15 +34,15 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
 	private List<UserFavorite> userFavorites;
-
+    
     public User() {}
     
-    public User(String username, String password, String email, Integer age, boolean isAdmin) {
+    public User(String username, String password, String email, Integer age, RoleType roleType) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.age = age;
-        this.isAdmin = isAdmin;
+        this.roleType = roleType;
     }
     
     public int getId() {
@@ -85,17 +85,11 @@ public class User {
         this.age = age;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
+    public RoleType getRoleType() {
+        return roleType;
     }
 
-    public void setAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
-    }
-
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", age="
-                + age + ", isAdmin=" + isAdmin + "]";
+    public void setRoleType(RoleType roleType) {
+        this.roleType = roleType;
     }
 }
