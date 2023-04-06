@@ -66,6 +66,16 @@ public class Resource {
         this.price = price;
     }
 
+    public Resource(String title, String address, String description, double price, User user,
+            ResourceType resourceType) {
+        this.title = title;
+        this.address = address;
+        this.description = description;
+        this.price = price;
+        this.user = user;
+        this.resourceType = resourceType;
+    }
+
     public int getId() {
         return id;
     }

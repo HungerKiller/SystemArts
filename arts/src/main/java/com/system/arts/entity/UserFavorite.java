@@ -20,6 +20,11 @@ public class UserFavorite {
 
     public UserFavorite() {}
 
+    public UserFavorite(User user, Resource resource) {
+        this.user = user;
+        this.resource = resource;
+    }
+    
     public int getId() {
         return id;
     }

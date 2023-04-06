@@ -43,8 +43,10 @@ public class Comment {
 
     public Comment() {}
 
-    public Comment(String content) {
+    public Comment(String content, User user, Resource resource) {
         this.content = content;
+        this.user = user;
+        this.resource = resource;
     }
 
     public int getId() {
