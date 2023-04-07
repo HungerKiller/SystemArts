@@ -51,7 +51,7 @@ public class UserService {
             existingUser.setPassword(updatedUser.getPassword());
             existingUser.setEmail(updatedUser.getEmail());
             existingUser.setAge(updatedUser.getAge());
-            existingUser.setRoleType(updatedUser.getRoleType());
+            existingUser.setRole(updatedUser.getRole());
             return userRepository.save(existingUser);
         } else {
             throw new IllegalArgumentException("User not found with id " + updatedUser.getId());

@@ -9,7 +9,7 @@ import com.system.arts.entity.Comment;
 import com.system.arts.entity.Resource;
 import com.system.arts.entity.ResourceType;
 import com.system.arts.entity.User;
-import com.system.arts.entity.RoleType;
+import com.system.arts.entity.Role;
 import com.system.arts.service.CommentService;
 import com.system.arts.service.ResourceService;
 import com.system.arts.service.ResourceTypeService;
@@ -45,11 +45,11 @@ public class ArtsApplication implements CommandLineRunner {
 		}
 
         // Create users
-        User user1 = new User("user1", "password1", "email1", 20, RoleType.ADMIN);
-        User user2 = new User("user2", "password2", "email2", 20, RoleType.USER);
-		User user3 = new User("user3", "password3", "email3", 20, RoleType.USER);
-		User user4 = new User("user4", "password4", "email4", 20, RoleType.USER);
-		User user5 = new User("user5", "password5", "email5", 20, RoleType.USER);
+        User user1 = new User("user1", "password1", "email1", 20, Role.ADMIN);
+        User user2 = new User("user2", "password2", "email2", 20, Role.USER);
+		User user3 = new User("user3", "password3", "email3", 20, Role.USER);
+		User user4 = new User("user4", "password4", "email4", 20, Role.USER);
+		User user5 = new User("user5", "password5", "email5", 20, Role.USER);
 		userService.createUser(user1);
 		userService.createUser(user2);
 		userService.createUser(user3);

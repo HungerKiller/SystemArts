@@ -23,8 +23,8 @@ public class User {
     @Column(name = "age")
     private Integer age;
     
-    @Column(name = "roleType", nullable = false)
-    private RoleType roleType;
+    @Column(name = "role", nullable = false)
+    private Role role;
     
     @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
 	private List<Resource> resources;
@@ -37,12 +37,12 @@ public class User {
     
     public User() {}
     
-    public User(String username, String password, String email, Integer age, RoleType roleType) {
+    public User(String username, String password, String email, Integer age, Role role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.age = age;
-        this.roleType = roleType;
+        this.role = role;
     }
     
     public int getId() {
@@ -85,11 +85,11 @@ public class User {
         this.age = age;
     }
 
-    public RoleType getRoleType() {
-        return roleType;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleType(RoleType roleType) {
-        this.roleType = roleType;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

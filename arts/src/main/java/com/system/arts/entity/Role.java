@@ -1,11 +1,11 @@
 package com.system.arts.entity;
 
-public enum RoleType {
-    ADMIN("admin"), USER("user");
+public enum Role {
+    ADMIN("ADMIN"), USER("USER");
 
     private String roleName;
 
-    RoleType(String roleName) {
+    Role(String roleName) {
         this.roleName = roleName;
     }
 
