@@ -5,6 +5,7 @@ import com.system.arts.service.ResourceTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class ResourceTypeController {
     @Autowired
     private ResourceTypeService resourceTypeService;
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<ResourceType>> getAllResourceTypes() {
         List<ResourceType> resourceTypes = resourceTypeService.getAllResourceTypes();
         return ResponseEntity.ok(resourceTypes);
@@ -28,12 +29,14 @@ public class ResourceTypeController {
         return ResponseEntity.ok(resourceType);
     }
 
-    @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/")
     public ResponseEntity<ResourceType> createResourceType(@RequestBody ResourceType resourceType) {
         ResourceType createdResourceType = resourceTypeService.createResourceType(resourceType);
         return new ResponseEntity<>(createdResourceType, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<ResourceType> updateResourceType(@PathVariable int id, @RequestBody ResourceType resourceType) {
         resourceType.setId(id);
@@ -41,6 +44,7 @@ public class ResourceTypeController {
         return ResponseEntity.ok(updatedResourceType);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteResourceType(@PathVariable int id) {
         resourceTypeService.deleteResourceType(id);

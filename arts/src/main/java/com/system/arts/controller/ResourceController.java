@@ -29,7 +29,7 @@ public class ResourceController {
     @Autowired
     private ResourceService resourceService;
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<Resource>> getAllResources() {
         List<Resource> resources = resourceService.getAllResources();
         return ResponseEntity.ok(resources);
@@ -47,7 +47,7 @@ public class ResourceController {
         return ResponseEntity.ok(resources);
     }
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<Resource> createResource(@RequestBody Resource resource) {
         Resource createdResource = resourceService.createResource(resource);
         return new ResponseEntity<>(createdResource, HttpStatus.CREATED);

@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,31 +29,26 @@ public class UserController {
     private UserService userService;
     
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    // @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable int id) {
-        User user = userService.getUserById(id);
-        return ResponseEntity.ok(user);
-    }
-
-    @GetMapping("/byName/{name}")
-    public ResponseEntity<User> getUserByName(@PathVariable String name) {
-        User user = userService.getUserByName(name);
-        return ResponseEntity.ok(user);
-    }
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User createdUser = userService.createUser(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable int id) {
+        User user = userService.getUserById(id);
+        return ResponseEntity.ok(user);
+    }
+    
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user) {
         user.setId(id);
@@ -62,5 +60,25 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @GetMapping("/currentUser")
+    public ResponseEntity<String> checkCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("Current user roles: " + authentication.getAuthorities());
+
+        if (authentication != null && authentication.getPrincipal() != null) {
+            if (authentication.getPrincipal() instanceof String) {
+                String username = (String) authentication.getPrincipal();
+                System.out.println("Current user string: " + username);
+                return ResponseEntity.ok(username);
+            } else if (authentication.getPrincipal() instanceof UserDetails) {
+                String username = ((UserDetails) authentication.getPrincipal()).getUsername();
+                System.out.println("Current user getPrincipal: " + username);
+                return ResponseEntity.ok(username);
+            }
+        }
+
+        return null;
     }
 }
