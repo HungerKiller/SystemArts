@@ -79,6 +79,7 @@ public class ResourceController {
 
             // Save new file
             Path path = Paths.get(uploadDir + resource.getId() + file.getOriginalFilename());
+            Files.deleteIfExists(path);
             Files.copy(file.getInputStream(), path);
 
             resource.setAddress(path.toString());
