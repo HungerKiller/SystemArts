@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -52,6 +54,11 @@ public class WebSecurityConfig {
     }
 
     @Bean
+    public SecurityContext securityContext() {
+        return SecurityContextHolder.getContext();
+    }
+    
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         //由于使用的是JWT，这里不需要csrf防护
         httpSecurity.csrf().disable()
@@ -60,11 +67,9 @@ public class WebSecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 // 允许Swagger UI
-                .requestMatchers("/swagger-ui/index.html").permitAll()
-                // 允许对于网站静态资源的无授权访问
-                .requestMatchers(HttpMethod.GET, "/", "/*.html").permitAll()
+                .requestMatchers("/swagger-ui/**", "/arts-system-api-docs/**").permitAll()
                 // 对登录注册允许匿名访问
-                .requestMatchers("/user/login", "/user/register", "/api/users/").permitAll()
+                .requestMatchers("/api/auth/login", "/api/auth/register").permitAll()
                 //跨域请求会先进行一次options请求
                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
                 //测试时全部运行访问.permitAll();
