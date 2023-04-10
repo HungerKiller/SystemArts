@@ -28,6 +28,11 @@ public class UserFavoriteController {
         return new ResponseEntity<>(userFavorites, HttpStatus.OK);
     }
 
+    @GetMapping("/")
+    public List<UserFavorite> getAllUserFavorites() {
+        return userFavoriteService.getAllUserFavorites();
+    }
+
     @PostMapping("/")
     public ResponseEntity<Void> addUserFavorite(@RequestParam int userId, @RequestParam int resourceId) {
         userFavoriteService.addUserFavorite(userId, resourceId);

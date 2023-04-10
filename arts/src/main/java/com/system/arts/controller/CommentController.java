@@ -16,6 +16,16 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
+    @GetMapping("/")
+    public List<Comment> getAllComments() {
+        return commentService.getAllComments();
+    }
+
+    @GetMapping("/{id}")
+    public Comment getCommentById(@PathVariable int id) {
+        return commentService.getCommentById(id);
+    }
+    
     @GetMapping("/byResource/{resourceId}")
     public ResponseEntity<List<Comment>> getCommentsByResourceId(@PathVariable int resourceId) {
         List<Comment> comments = commentService.getCommentsByResourceId(resourceId);

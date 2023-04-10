@@ -23,6 +23,10 @@ public class UserFavoriteService {
     @Autowired
     private ResourceService resourceService;
 
+    public List<UserFavorite> getAllUserFavorites() {
+        return userFavoriteRepository.findAll();
+    }
+
     public List<UserFavorite> getUserFavoritesByUserId(int userId) {
         return userFavoriteRepository.findByUserId(userId);
     }
