@@ -20,6 +20,7 @@ import com.system.arts.entity.Resource;
 import com.system.arts.service.ResourceService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/resources")
 public class ResourceController {
 

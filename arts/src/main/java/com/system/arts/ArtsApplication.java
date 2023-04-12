@@ -5,11 +5,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.system.arts.entity.Announcement;
 import com.system.arts.entity.Comment;
 import com.system.arts.entity.Resource;
 import com.system.arts.entity.ResourceType;
 import com.system.arts.entity.User;
 import com.system.arts.entity.Role;
+import com.system.arts.service.AnnouncementService;
 import com.system.arts.service.CommentService;
 import com.system.arts.service.ResourceService;
 import com.system.arts.service.ResourceTypeService;
@@ -34,6 +36,9 @@ public class ArtsApplication implements CommandLineRunner {
 	@Autowired
 	private CommentService commentService;
 	
+	@Autowired
+	private AnnouncementService announcementService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ArtsApplication.class, args);
 	}
@@ -92,6 +97,7 @@ public class ArtsApplication implements CommandLineRunner {
 		userFavoriteService.addUserFavorite(4, 5);
 		userFavoriteService.addUserFavorite(4, 6);
 
+		// Create comments
 		Comment comment1 = new Comment("Comment1", user1, resource1);
 		Comment comment2 = new Comment("Comment2", user2, resource1);
 		Comment comment3 = new Comment("Comment3", user3, resource1);
@@ -106,5 +112,15 @@ public class ArtsApplication implements CommandLineRunner {
 		commentService.createComment(comment5);
 		commentService.createComment(comment6);
 		commentService.createComment(comment7);
+
+		// Create announcements
+		Announcement announcement1 = new Announcement("Title1", "Content1", true);
+		Announcement announcement2 = new Announcement("Title2", "Content2", true);
+		Announcement announcement3 = new Announcement("Title3", "Content3", true);
+		Announcement announcement4 = new Announcement("Title4", "Content4", true);
+		announcementService.createAnnouncement(announcement1);
+		announcementService.createAnnouncement(announcement2);
+		announcementService.createAnnouncement(announcement3);
+		announcementService.createAnnouncement(announcement4);
     }
 }

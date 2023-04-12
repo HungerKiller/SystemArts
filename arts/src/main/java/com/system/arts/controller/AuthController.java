@@ -6,11 +6,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.system.arts.entity.Constant;
 import com.system.arts.entity.User;
 import com.system.arts.service.UserService;
@@ -19,6 +22,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/auth")
 public class AuthController {
 
@@ -28,6 +32,9 @@ public class AuthController {
     @Autowired
     private UserService userService;
     
+    @Autowired
+    ObjectMapper objectMapper;
+
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) {
         User createdUser = userService.createUser(user);
@@ -35,7 +42,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User user) {
+    public String login(@RequestBody User user) throws JsonProcessingException {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
         authenticationManager.authenticate(authenticationToken);
@@ -46,6 +53,6 @@ public class AuthController {
                 .setKey(Constant.JWT_SIGN_KEY.getBytes(StandardCharsets.UTF_8))
                 .sign();
 
-        return token;
+        return objectMapper.writeValueAsString(token);
     }
 }
