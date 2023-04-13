@@ -70,6 +70,8 @@ public class WebSecurityConfig {
                 .requestMatchers("/swagger-ui/**", "/arts-system-api-docs/**").permitAll()
                 // 对登录注册允许匿名访问
                 .requestMatchers("/api/auth/login", "/api/auth/register").permitAll()
+                //跨域请求会先进行一次options请求
+                .requestMatchers(HttpMethod.OPTIONS).permitAll()
                 //测试时全部运行访问.permitAll();
                 .requestMatchers("/test/**").permitAll()
                 .anyRequest()// 除上面外的所有请求全部需要鉴权认证
