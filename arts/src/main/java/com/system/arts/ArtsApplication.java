@@ -10,6 +10,7 @@ import com.system.arts.entity.Comment;
 import com.system.arts.entity.Resource;
 import com.system.arts.entity.ResourceType;
 import com.system.arts.entity.User;
+import com.system.arts.entity.UserFavorite;
 import com.system.arts.entity.Role;
 import com.system.arts.service.AnnouncementService;
 import com.system.arts.service.CommentService;
@@ -84,18 +85,18 @@ public class ArtsApplication implements CommandLineRunner {
 		resourceService.createResource(resource6);
 
 		// Create user favorites
-		userFavoriteService.addUserFavorite(1, 5);
-		userFavoriteService.addUserFavorite(1, 6);
-		userFavoriteService.addUserFavorite(2, 5);
-		userFavoriteService.addUserFavorite(2, 6);
-		userFavoriteService.addUserFavorite(3, 1);
-		userFavoriteService.addUserFavorite(3, 2);
-		userFavoriteService.addUserFavorite(3, 3);
-		userFavoriteService.addUserFavorite(3, 4);
-		userFavoriteService.addUserFavorite(3, 5);
-		userFavoriteService.addUserFavorite(3, 6);
-		userFavoriteService.addUserFavorite(4, 5);
-		userFavoriteService.addUserFavorite(4, 6);
+		userFavoriteService.createUserFavorite(new UserFavorite(user1, resource5));
+		userFavoriteService.createUserFavorite(new UserFavorite(user1, resource6));
+		userFavoriteService.createUserFavorite(new UserFavorite(user2, resource5));
+		userFavoriteService.createUserFavorite(new UserFavorite(user2, resource6));
+		userFavoriteService.createUserFavorite(new UserFavorite(user3, resource1));
+		userFavoriteService.createUserFavorite(new UserFavorite(user3, resource2));
+		userFavoriteService.createUserFavorite(new UserFavorite(user3, resource3));
+		userFavoriteService.createUserFavorite(new UserFavorite(user3, resource4));
+		userFavoriteService.createUserFavorite(new UserFavorite(user3, resource5));
+		userFavoriteService.createUserFavorite(new UserFavorite(user3, resource6));
+		userFavoriteService.createUserFavorite(new UserFavorite(user4, resource5));
+		userFavoriteService.createUserFavorite(new UserFavorite(user4, resource6));
 
 		// Create comments
 		Comment comment1 = new Comment("Comment1", user1, resource1);

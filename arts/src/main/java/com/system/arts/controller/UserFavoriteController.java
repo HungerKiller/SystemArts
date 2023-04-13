@@ -35,13 +35,13 @@ public class UserFavoriteController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Void> addUserFavorite(@RequestParam int userId, @RequestParam int resourceId) {
-        userFavoriteService.addUserFavorite(userId, resourceId);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<UserFavorite> addUserFavorite(@RequestBody UserFavorite userFavorite) {
+        UserFavorite createdUserFavorite = userFavoriteService.createUserFavorite(userFavorite);
+        return new ResponseEntity<>(createdUserFavorite, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUserFavorite(@RequestParam int id) {
+    public ResponseEntity<Void> deleteUserFavorite(@PathVariable int id) {
         userFavoriteService.deleteUserFavorite(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
