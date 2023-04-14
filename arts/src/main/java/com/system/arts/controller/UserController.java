@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,25 +59,5 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
-
-    @GetMapping("/currentUser")
-    public ResponseEntity<String> checkCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("Current user roles: " + authentication.getAuthorities());
-
-        if (authentication != null && authentication.getPrincipal() != null) {
-            if (authentication.getPrincipal() instanceof String) {
-                String username = (String) authentication.getPrincipal();
-                System.out.println("Current user string: " + username);
-                return ResponseEntity.ok(username);
-            } else if (authentication.getPrincipal() instanceof UserDetails) {
-                String username = ((UserDetails) authentication.getPrincipal()).getUsername();
-                System.out.println("Current user getPrincipal: " + username);
-                return ResponseEntity.ok(username);
-            }
-        }
-
-        return null;
     }
 }

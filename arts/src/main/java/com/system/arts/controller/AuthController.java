@@ -1,16 +1,21 @@
 package com.system.arts.controller;
 
 import cn.hutool.jwt.JWT;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -54,5 +59,27 @@ public class AuthController {
                 .sign();
 
         return objectMapper.writeValueAsString(token);
+    }
+
+    @GetMapping("/currentUser")
+    public ResponseEntity<User> checkCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("Current user roles: " + authentication.getAuthorities());
+
+        if (authentication != null && authentication.getPrincipal() != null) {
+            if (authentication.getPrincipal() instanceof String) {
+                String username = (String) authentication.getPrincipal();
+                System.out.println("Current user string: " + username);
+                User user = userService.getUserByName(username);
+                return ResponseEntity.ok(user);
+            } else if (authentication.getPrincipal() instanceof UserDetails) {
+                String username = ((UserDetails) authentication.getPrincipal()).getUsername();
+                System.out.println("Current user getPrincipal: " + username);
+                User user = userService.getUserByName(username);
+                return ResponseEntity.ok(user);
+            }
+        }
+
+        return null;
     }
 }
