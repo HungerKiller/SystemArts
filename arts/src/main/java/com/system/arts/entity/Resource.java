@@ -17,11 +17,11 @@ public class Resource {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "address")
-    private String address;
-
     @Column(name = "description")
     private String description;
+
+    @Column(name = "clickCount")
+    private int clickCount;
 
     @Column(name = "price")
     private double price;
@@ -46,6 +46,9 @@ public class Resource {
     @OneToMany(mappedBy = "resource", cascade = {CascadeType.REMOVE})
 	private List<UserFavorite> userFavorites;
 
+    @OneToMany(mappedBy = "resource", cascade = {CascadeType.REMOVE})
+	private List<ResourceFile> resourceFiles;
+
     @PrePersist
     protected void onCreate() {
         createdAt = new Timestamp(new Date().getTime());
@@ -59,18 +62,17 @@ public class Resource {
 
     public Resource() {}
 
-    public Resource(String title, String address, String description, double price) {
+    public Resource(String title, String description, double price) {
         this.title = title;
-        this.address = address;
         this.description = description;
         this.price = price;
     }
 
-    public Resource(String title, String address, String description, double price, User user,
+    public Resource(String title, String description, int clickCount, double price, User user,
             ResourceType resourceType) {
         this.title = title;
-        this.address = address;
         this.description = description;
+        this.clickCount = clickCount;
         this.price = price;
         this.user = user;
         this.resourceType = resourceType;
@@ -92,20 +94,20 @@ public class Resource {
         this.title = title;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public int getClickCount() {
+        return clickCount;
+    }
+
+    public void setClickCount(int clickCount) {
+        this.clickCount = clickCount;
     }
 
     public double getPrice() {

@@ -71,12 +71,12 @@ public class ArtsApplication implements CommandLineRunner {
 		resourceTypeService.createResourceType(resourceType3);
 
 		// Create resources
-		Resource resource1 = new Resource("Resource1", "address1", "description1", 11, user1, resourceType1);
-		Resource resource2 = new Resource("Resource2", "address2", "description2", 12.5, user1, resourceType2);
-		Resource resource3 = new Resource("Resource3", "address3", "description3", 13, user2, resourceType1);
-		Resource resource4 = new Resource("Resource4", "address4", "description4", 14, user2, resourceType3);
-		Resource resource5 = new Resource("Resource5", "address5", "description5", 15, user3, resourceType1);
-		Resource resource6 = new Resource("Resource6", "address6", "description6", 16, user3, resourceType3);
+		Resource resource1 = new Resource("Resource1", "description1", 100, 11, user1, resourceType1);
+		Resource resource2 = new Resource("Resource2", "description2", 110, 12.5, user1, resourceType2);
+		Resource resource3 = new Resource("Resource3", "description3", 200, 13, user2, resourceType1);
+		Resource resource4 = new Resource("Resource4", "description4", 10, 14, user2, resourceType3);
+		Resource resource5 = new Resource("Resource5", "description5", 50, 15, user3, resourceType1);
+		Resource resource6 = new Resource("Resource6", "description6", 5, 16, user3, resourceType3);
 		resourceService.createResource(resource1);
 		resourceService.createResource(resource2);
 		resourceService.createResource(resource3);

@@ -37,8 +37,8 @@ public class ResourceService {
         if (optionalResource.isPresent()) {
             Resource existingResource = optionalResource.get();
             existingResource.setTitle(updatedResource.getTitle());
-            existingResource.setAddress(updatedResource.getAddress());
             existingResource.setDescription(updatedResource.getDescription());
+            existingResource.setClickCount(updatedResource.getClickCount());
             existingResource.setPrice(updatedResource.getPrice());
             existingResource.setUser(updatedResource.getUser());
             existingResource.setResourceType(updatedResource.getResourceType());
