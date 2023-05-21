@@ -59,9 +59,9 @@ public class ResourceFileController {
             // Create resource file
             ResourceFile resourceFile = new ResourceFile(path.toString(), resource);
             resourceFileService.createResourceFile(resourceFile);
-            return new ResponseEntity<>("File uploaded successfully", HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (IOException e) {
-            return new ResponseEntity<>("Error uploading file", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
