@@ -28,10 +28,8 @@ public class Comment {
     @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_user_id"))
     private User user;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "resource_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_resource_id"))
-    private Resource resource;
+    @Column(name = "resource_id")
+    private int resourceId;
 
     @PrePersist
     protected void onCreate() {
@@ -46,10 +44,10 @@ public class Comment {
 
     public Comment() {}
 
-    public Comment(String content, User user, Resource resource) {
+    public Comment(String content, User user, int resourceId) {
         this.content = content;
         this.user = user;
-        this.resource = resource;
+        this.resourceId = resourceId;
     }
 
     public int getId() {
@@ -92,11 +90,11 @@ public class Comment {
         this.user = user;
     }
 
-    public Resource getResource() {
-        return resource;
+    public int getResourceId() {
+        return resourceId;
     }
 
-    public void setResource(Resource resource) {
-        this.resource = resource;
+    public void setResourceId(int resourceId) {
+        this.resourceId = resourceId;
     }
 }

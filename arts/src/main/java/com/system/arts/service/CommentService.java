@@ -37,7 +37,7 @@ public class CommentService {
             Comment existingComment = optionalComment.get();
             existingComment.setContent(updatedComment.getContent());
             existingComment.setUser(updatedComment.getUser());
-            existingComment.setResource(updatedComment.getResource());
+            existingComment.setResourceId(updatedComment.getResourceId());
             return commentRepository.save(existingComment);
         } else {
             throw new IllegalArgumentException("Comment not found with id " + updatedComment.getId());

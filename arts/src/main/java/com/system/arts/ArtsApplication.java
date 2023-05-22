@@ -106,13 +106,13 @@ public class ArtsApplication implements CommandLineRunner {
 		userFavoriteService.createUserFavorite(new UserFavorite(user4, resource6));
 
 		// Create comments
-		Comment comment1 = new Comment("Comment1", user1, resource1);
-		Comment comment2 = new Comment("Comment2", user2, resource1);
-		Comment comment3 = new Comment("Comment3", user3, resource1);
-		Comment comment4 = new Comment("Comment4", user4, resource1);
-		Comment comment5 = new Comment("Comment5", user5, resource1);
-		Comment comment6 = new Comment("Comment1", user1, resource2);
-		Comment comment7 = new Comment("Comment1", user1, resource3);
+		Comment comment1 = new Comment("Comment1", user1, resource1.getId());
+		Comment comment2 = new Comment("Comment2", user2, resource1.getId());
+		Comment comment3 = new Comment("Comment3", user3, resource1.getId());
+		Comment comment4 = new Comment("Comment4", user4, resource1.getId());
+		Comment comment5 = new Comment("Comment5", user5, resource1.getId());
+		Comment comment6 = new Comment("Comment1", user1, resource2.getId());
+		Comment comment7 = new Comment("Comment1", user1, resource3.getId());
 		commentService.createComment(comment1);
 		commentService.createComment(comment2);
 		commentService.createComment(comment3);

@@ -44,7 +44,7 @@ public class Resource {
     @JoinColumn(name = "resource_type_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_resource_type_id"))
     private ResourceType resourceType;
 
-    @OneToMany(mappedBy = "resource", cascade = {CascadeType.REMOVE})
+    @OneToMany(mappedBy = "resourceId", cascade = {CascadeType.REMOVE})
 	private List<Comment> comments;
 
     @OneToMany(mappedBy = "resource", cascade = {CascadeType.REMOVE})
