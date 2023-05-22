@@ -68,6 +68,8 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests()
                 // 允许Swagger UI
                 .requestMatchers("/swagger-ui/**", "/arts-system-api-docs/**").permitAll()
+                // 允许对于网站静态资源的无授权访问
+                .requestMatchers(HttpMethod.GET, "/", "/*").permitAll()
                 // 对登录注册允许匿名访问
                 .requestMatchers("/api/auth/login", "/api/auth/register", "/api/resources/", "/api/announcements/").permitAll()
                 //跨域请求会先进行一次options请求

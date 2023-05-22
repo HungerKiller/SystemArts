@@ -27,9 +27,6 @@ import java.util.List;
 @RequestMapping("/api/resource-files")
 public class ResourceFileController {
 
-    @Value("${file.upload-dir}")
-    private String uploadDir;
-
     @Autowired
     private ResourceService resourceService;
     
@@ -52,6 +49,7 @@ public class ResourceFileController {
             Resource resource = resourceService.getResourceById(id);
 
             // Save new file
+            String uploadDir = "./arts/src/main/resources/static/";
             Path path = Paths.get(uploadDir + resource.getId() + file.getOriginalFilename());
             Files.deleteIfExists(path);
             Files.copy(file.getInputStream(), path);
