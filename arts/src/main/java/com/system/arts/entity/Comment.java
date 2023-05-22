@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Comments")
 public class Comment {
@@ -27,6 +29,7 @@ public class Comment {
     private User user;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "resource_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_resource_id"))
     private Resource resource;
 

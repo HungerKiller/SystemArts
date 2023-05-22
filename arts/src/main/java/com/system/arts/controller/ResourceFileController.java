@@ -65,7 +65,7 @@ public class ResourceFileController {
             }
 
             if (!exists) {
-                ResourceFile resourceFile = new ResourceFile(path.toString(), name, resource);
+                ResourceFile resourceFile = new ResourceFile(path.toString(), name, id);
                 resourceFileService.createResourceFile(resourceFile);
             }
 

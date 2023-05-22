@@ -1,9 +1,11 @@
 package com.system.arts;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import com.system.arts.entity.Announcement;
 import com.system.arts.entity.Comment;
@@ -40,6 +42,11 @@ public class ArtsApplication implements CommandLineRunner {
 	@Autowired
 	private AnnouncementService announcementService;
 
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ArtsApplication.class, args);
 	}

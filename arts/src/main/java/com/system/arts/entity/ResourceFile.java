@@ -1,5 +1,7 @@
 package com.system.arts.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -16,16 +18,15 @@ public class ResourceFile {
     @Column(name = "name")
     private String name;
     
-    @ManyToOne
-    @JoinColumn(name = "resource_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_resource_id"))
-    private Resource resource;
+    @Column(name = "resource_id")
+    private int resourceId;
 
     public ResourceFile() {}
 
-    public ResourceFile(String path, String name, Resource resource) {
+    public ResourceFile(String path, String name, int resourceId) {
         this.path = path;
         this.name = name;
-        this.resource = resource;
+        this.resourceId = resourceId;
     }
 
     public String getPath() {
@@ -43,12 +44,12 @@ public class ResourceFile {
     public void setName(String name) {
         this.name = name;
     }
-    
-    public Resource getResource() {
-        return resource;
+
+    public int getResourceId() {
+        return resourceId;
     }
 
-    public void setResource(Resource resource) {
-        this.resource = resource;
+    public void setResourceId(int resourceId) {
+        this.resourceId = resourceId;
     }
 }

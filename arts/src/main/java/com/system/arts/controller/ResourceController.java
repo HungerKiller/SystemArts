@@ -2,12 +2,15 @@ package com.system.arts.controller;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.system.arts.dto.ResourceDto;
 import com.system.arts.entity.Resource;
 import com.system.arts.service.ResourceService;
 
@@ -18,17 +21,23 @@ public class ResourceController {
 
     @Autowired
     private ResourceService resourceService;
+    
+    @Autowired
+	private ModelMapper modelMapper;
 
     @GetMapping("/")
-    public ResponseEntity<List<Resource>> getAllResources() {
-        List<Resource> resources = resourceService.getAllResources();
+    public ResponseEntity<List<ResourceDto>> getAllResources() {
+        List<ResourceDto> resources = resourceService.getAllResources().stream()
+                .map(post -> modelMapper.map(post, ResourceDto.class))
+                .collect(Collectors.toList());
         return ResponseEntity.ok(resources);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Resource> getResourceById(@PathVariable int id) {
+    public ResponseEntity<ResourceDto> getResourceById(@PathVariable int id) {
         Resource resource = resourceService.getResourceById(id);
-        return ResponseEntity.ok(resource);
+        ResourceDto resourceDto = modelMapper.map(resource, ResourceDto.class);
+        return ResponseEntity.ok(resourceDto);
     }
 
     @GetMapping("/byUser/{userId}")
