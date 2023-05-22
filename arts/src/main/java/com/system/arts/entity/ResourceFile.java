@@ -12,6 +12,9 @@ public class ResourceFile {
 
     @Column(name = "path")
     private String path;
+
+    @Column(name = "name")
+    private String name;
     
     @ManyToOne
     @JoinColumn(name = "resource_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_resource_id"))
@@ -19,8 +22,9 @@ public class ResourceFile {
 
     public ResourceFile() {}
 
-    public ResourceFile(String path, Resource resource) {
+    public ResourceFile(String path, String name, Resource resource) {
         this.path = path;
+        this.name = name;
         this.resource = resource;
     }
 
@@ -32,6 +36,14 @@ public class ResourceFile {
         this.path = path;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     public Resource getResource() {
         return resource;
     }

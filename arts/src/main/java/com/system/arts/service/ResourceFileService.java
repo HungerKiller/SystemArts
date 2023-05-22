@@ -23,6 +23,10 @@ public class ResourceFileService {
                 .orElseThrow(() -> new IllegalArgumentException("Resource file not found with id " + id));
     }
 
+    public List<ResourceFile> getResourceFilesByResourceId(int resourceId) {
+        return resourceFileRepository.findByResourceId(resourceId);
+    }
+
     public ResourceFile createResourceFile(ResourceFile resourceFile) {
         return resourceFileRepository.save(resourceFile);
     }

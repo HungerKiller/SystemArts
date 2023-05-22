@@ -50,13 +50,25 @@ public class ResourceFileController {
 
             // Save new file
             String uploadDir = "./arts/src/main/resources/static/";
-            Path path = Paths.get(uploadDir + resource.getId() + file.getOriginalFilename());
+            String name = resource.getId() + "__" +file.getOriginalFilename();
+            Path path = Paths.get(uploadDir + name);
             Files.deleteIfExists(path);
             Files.copy(file.getInputStream(), path);
 
             // Create resource file
-            ResourceFile resourceFile = new ResourceFile(path.toString(), resource);
-            resourceFileService.createResourceFile(resourceFile);
+            List<ResourceFile> resourceFiles = resourceFileService.getResourceFilesByResourceId(id);
+            boolean exists = false;
+            for (ResourceFile resourceFile : resourceFiles) {
+                if (resourceFile.getPath().equals(path.toString())) {
+                    exists = true;
+                }
+            }
+
+            if (!exists) {
+                ResourceFile resourceFile = new ResourceFile(path.toString(), name, resource);
+                resourceFileService.createResourceFile(resourceFile);
+            }
+
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
