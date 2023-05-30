@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Bean;
 
 import com.system.arts.entity.Announcement;
 import com.system.arts.entity.Comment;
+import com.system.arts.entity.Order;
+import com.system.arts.entity.OrderProduct;
+import com.system.arts.entity.OrderStatus;
 import com.system.arts.entity.Resource;
 import com.system.arts.entity.ResourceFile;
 import com.system.arts.entity.ResourceType;
@@ -17,6 +20,8 @@ import com.system.arts.entity.UserFavorite;
 import com.system.arts.entity.Role;
 import com.system.arts.service.AnnouncementService;
 import com.system.arts.service.CommentService;
+import com.system.arts.service.OrderProductService;
+import com.system.arts.service.OrderService;
 import com.system.arts.service.ResourceFileService;
 import com.system.arts.service.ResourceService;
 import com.system.arts.service.ResourceTypeService;
@@ -46,6 +51,12 @@ public class ArtsApplication implements CommandLineRunner {
 	
 	@Autowired
 	private AnnouncementService announcementService;
+
+	@Autowired
+	private OrderService orderService;
+
+	@Autowired
+	private OrderProductService orderProductService;
 
 	@Bean
 	public ModelMapper modelMapper() {
@@ -167,5 +178,17 @@ public class ArtsApplication implements CommandLineRunner {
 		announcementService.createAnnouncement(announcement1);
 		announcementService.createAnnouncement(announcement2);
 		announcementService.createAnnouncement(announcement3);
+
+		// Order
+		Order order1 = new Order(user1, OrderStatus.ACTIVE);
+		this.orderService.createOrder(order1);
+
+		// Order products
+		OrderProduct orderProduct1 = new OrderProduct(order1.getId(), resource1);
+		OrderProduct orderProduct2 = new OrderProduct(order1.getId(), resource2);
+		OrderProduct orderProduct3 = new OrderProduct(order1.getId(), resource3);
+		this.orderProductService.createOrderProduct(orderProduct1);
+		this.orderProductService.createOrderProduct(orderProduct2);
+		this.orderProductService.createOrderProduct(orderProduct3);
     }
 }
