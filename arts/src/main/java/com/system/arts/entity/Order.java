@@ -17,6 +17,9 @@ public class Order {
     @Column(name = "created_at")
     private Timestamp createdAt;
 
+    @Column(name = "isCart")
+    private boolean isCart;
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_user_id"))
     private User user;
@@ -37,6 +40,14 @@ public class Order {
     public Order(User user, OrderStatus orderStatus) {
         this.user = user;
         this.orderStatus = orderStatus;
+    }
+
+    public boolean isCart() {
+        return isCart;
+    }
+
+    public void setCart(boolean isCart) {
+        this.isCart = isCart;
     }
 
     public int getId() {

@@ -14,6 +14,7 @@ public class OrderDto {
 
     private int id;
     private Timestamp createdAt;
+    private boolean isCart;
     private User user;
     private OrderStatus orderStatus;
 	private List<OrderProduct> orderProducts;
@@ -36,6 +37,14 @@ public class OrderDto {
         this.createdAt = createdAt;
     }
 
+    public boolean isCart() {
+        return isCart;
+    }
+
+    public void setCart(boolean isCart) {
+        this.isCart = isCart;
+    }
+    
     public User getUser() {
         return user;
     }

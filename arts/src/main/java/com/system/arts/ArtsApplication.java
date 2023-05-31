@@ -181,14 +181,32 @@ public class ArtsApplication implements CommandLineRunner {
 
 		// Order
 		Order order1 = new Order(user1, OrderStatus.ACTIVE);
+		Order order2 = new Order(user2, OrderStatus.COMPLETED);
+		Order order3 = new Order(user2, OrderStatus.COMPLETED);
+		Order order4 = new Order(user2, OrderStatus.PAYED);
 		this.orderService.createOrder(order1);
+		this.orderService.createOrder(order2);
+		this.orderService.createOrder(order3);
+		this.orderService.createOrder(order4);
 
 		// Order products
 		OrderProduct orderProduct1 = new OrderProduct(order1.getId(), resource1, 1);
 		OrderProduct orderProduct2 = new OrderProduct(order1.getId(), resource2, 2);
 		OrderProduct orderProduct3 = new OrderProduct(order1.getId(), resource3, 3);
+		OrderProduct orderProduct4 = new OrderProduct(order2.getId(), resource2, 3);
+		OrderProduct orderProduct5 = new OrderProduct(order2.getId(), resource3, 4);
+		OrderProduct orderProduct6 = new OrderProduct(order3.getId(), resource1, 3);
+		OrderProduct orderProduct7 = new OrderProduct(order3.getId(), resource3, 3);
+		OrderProduct orderProduct8 = new OrderProduct(order4.getId(), resource1, 3);
+		OrderProduct orderProduct9 = new OrderProduct(order4.getId(), resource3, 3);
 		this.orderProductService.createOrderProduct(orderProduct1);
 		this.orderProductService.createOrderProduct(orderProduct2);
 		this.orderProductService.createOrderProduct(orderProduct3);
+		this.orderProductService.createOrderProduct(orderProduct4);
+		this.orderProductService.createOrderProduct(orderProduct5);
+		this.orderProductService.createOrderProduct(orderProduct6);
+		this.orderProductService.createOrderProduct(orderProduct7);
+		this.orderProductService.createOrderProduct(orderProduct8);
+		this.orderProductService.createOrderProduct(orderProduct9);
     }
 }
