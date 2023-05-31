@@ -17,11 +17,15 @@ public class OrderProduct {
     @JoinColumn(name = "resource_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_resource_id"))
     private Resource resource;
 
+    @Column(name = "quantity")
+    private int quantity;
+
     public OrderProduct() {}
 
-    public OrderProduct(int orderId, Resource resource) {
+    public OrderProduct(int orderId, Resource resource, int quantity) {
         this.orderId = orderId;
         this.resource = resource;
+        this.quantity = quantity;
     }
 
     public int getId() {
@@ -46,5 +50,13 @@ public class OrderProduct {
 
     public void setResource(Resource resource) {
         this.resource = resource;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

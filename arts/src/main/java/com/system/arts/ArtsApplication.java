@@ -184,9 +184,9 @@ public class ArtsApplication implements CommandLineRunner {
 		this.orderService.createOrder(order1);
 
 		// Order products
-		OrderProduct orderProduct1 = new OrderProduct(order1.getId(), resource1);
-		OrderProduct orderProduct2 = new OrderProduct(order1.getId(), resource2);
-		OrderProduct orderProduct3 = new OrderProduct(order1.getId(), resource3);
+		OrderProduct orderProduct1 = new OrderProduct(order1.getId(), resource1, 1);
+		OrderProduct orderProduct2 = new OrderProduct(order1.getId(), resource2, 2);
+		OrderProduct orderProduct3 = new OrderProduct(order1.getId(), resource3, 3);
 		this.orderProductService.createOrderProduct(orderProduct1);
 		this.orderProductService.createOrderProduct(orderProduct2);
 		this.orderProductService.createOrderProduct(orderProduct3);
