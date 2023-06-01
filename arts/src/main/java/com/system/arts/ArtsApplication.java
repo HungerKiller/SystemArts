@@ -181,6 +181,7 @@ public class ArtsApplication implements CommandLineRunner {
 
 		// Order
 		Order order1 = new Order(user1, OrderStatus.ACTIVE);
+		order1.setIsCart(true);
 		Order order2 = new Order(user2, OrderStatus.COMPLETED);
 		Order order3 = new Order(user2, OrderStatus.COMPLETED);
 		Order order4 = new Order(user2, OrderStatus.PAYED);
