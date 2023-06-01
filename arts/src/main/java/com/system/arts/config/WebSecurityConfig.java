@@ -71,7 +71,7 @@ public class WebSecurityConfig {
                 // 允许对于网站静态资源的无授权访问
                 .requestMatchers(HttpMethod.GET, "/", "/*").permitAll()
                 // 对登录注册允许匿名访问
-                .requestMatchers("/api/auth/login", "/api/auth/register", "/api/resources/", "/api/resource-files/", "/api/announcements/").permitAll()
+                .requestMatchers("/api/auth/login", "/api/auth/register", "/api/resources/", "/api/resource-files/", "/api/resource-types/", "/api/announcements/").permitAll()
                 //跨域请求会先进行一次options请求
                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
                 //测试时全部运行访问.permitAll();
