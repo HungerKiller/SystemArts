@@ -42,11 +42,11 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public boolean isCart() {
+    public boolean getIsCart() {
         return isCart;
     }
 
-    public void setCart(boolean isCart) {
+    public void setIsCart(boolean isCart) {
         this.isCart = isCart;
     }
 

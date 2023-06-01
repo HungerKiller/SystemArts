@@ -48,6 +48,13 @@ public class OrderController {
         return ResponseEntity.ok(orders);
     }
 
+    @GetMapping("/cartOrderByUser/{userId}")
+    public ResponseEntity<OrderDto> getCartOrderByUserId(@PathVariable int userId) {
+        Order order = orderService.getCartOrderByUserId(userId);
+        OrderDto orderDto = modelMapper.map(order, OrderDto.class);
+        return ResponseEntity.ok(orderDto);
+    }
+
     @PostMapping("/")
     public ResponseEntity<Order> createOrder(@RequestBody Order Order) {
         Order createdOrder = orderService.createOrder(Order);

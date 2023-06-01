@@ -37,11 +37,11 @@ public class OrderDto {
         this.createdAt = createdAt;
     }
 
-    public boolean isCart() {
+    public boolean getIsCart() {
         return isCart;
     }
 
-    public void setCart(boolean isCart) {
+    public void setIsCart(boolean isCart) {
         this.isCart = isCart;
     }
     
