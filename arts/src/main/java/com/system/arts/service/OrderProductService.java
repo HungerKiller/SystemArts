@@ -1,6 +1,7 @@
 package com.system.arts.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,17 @@ public class OrderProductService {
         return orderProductRepository.save(OrderProduct);
     }
     
+    public OrderProduct updateOrderProduct(OrderProduct updatedOrderProduct) {
+        Optional<OrderProduct> optionalOrderProduct = orderProductRepository.findById(updatedOrderProduct.getId());
+        if (optionalOrderProduct.isPresent()) {
+            OrderProduct existingOrderProduct = optionalOrderProduct.get();
+            existingOrderProduct.setQuantity(updatedOrderProduct.getQuantity());
+            return orderProductRepository.save(existingOrderProduct);
+        } else {
+            throw new IllegalArgumentException("OrderProduct not found with id " + updatedOrderProduct.getId());
+        }
+    }
+
     public void deleteOrderProduct(int id) {
         OrderProduct OrderProduct = orderProductRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("OrderProduct not found with id " + id));

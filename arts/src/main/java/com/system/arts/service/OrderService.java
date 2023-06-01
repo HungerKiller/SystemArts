@@ -1,6 +1,7 @@
 package com.system.arts.service;
 
 import com.system.arts.entity.Order;
+import com.system.arts.entity.OrderProduct;
 import com.system.arts.entity.OrderStatus;
 import com.system.arts.entity.User;
 import com.system.arts.repository.OrderRepository;
@@ -9,6 +10,7 @@ import com.system.arts.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +22,9 @@ public class OrderService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    OrderProductService orderProductService;
 
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
@@ -64,7 +69,23 @@ public class OrderService {
             Order existingOrder = optionalOrder.get();
             existingOrder.setOrderStatus(updatedOrder.getOrderStatus());
             existingOrder.setIsCart(updatedOrder.getIsCart());
-            existingOrder.setOrderProducts(updatedOrder.getOrderProducts());
+            // Add or update product
+            for (OrderProduct product : updatedOrder.getOrderProducts()) {
+                if (product.getId() == 0) {
+                    orderProductService.createOrderProduct(product);
+                } else {
+                    orderProductService.updateOrderProduct(product);
+                }
+            }
+            // Delete product
+            for (OrderProduct product : existingOrder.getOrderProducts()) {
+                Boolean exist = updatedOrder.getOrderProducts().stream().anyMatch(p -> p.getId() == product.getId()); 
+                if (!exist) {
+                    orderProductService.deleteOrderProduct(product.getId());
+                }
+            }
+
+            existingOrder.setOrderProducts(new ArrayList<OrderProduct>());
             return orderRepository.save(existingOrder);
         } else {
             throw new IllegalArgumentException("Order not found with id " + updatedOrder.getId());
