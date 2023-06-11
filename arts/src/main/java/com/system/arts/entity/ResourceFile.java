@@ -17,18 +17,31 @@ public class ResourceFile {
 
     @Column(name = "name")
     private String name;
-    
+
+    @Column(name = "isValid")
+    private Boolean isValid;
+
     @Column(name = "resource_id")
     private int resourceId;
 
-    public ResourceFile() {}
+    public ResourceFile() {
+    }
 
-    public ResourceFile(String path, String name, int resourceId) {
+    public ResourceFile(String path, String name, Boolean isValid, int resourceId) {
         this.path = path;
         this.name = name;
+        this.isValid = isValid;
         this.resourceId = resourceId;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getPath() {
         return path;
     }
@@ -43,6 +56,14 @@ public class ResourceFile {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getIsValid() {
+        return isValid;
+    }
+
+    public void setIsValid(Boolean isValid) {
+        this.isValid = isValid;
     }
 
     public int getResourceId() {

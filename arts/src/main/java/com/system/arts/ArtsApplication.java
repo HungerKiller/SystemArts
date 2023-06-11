@@ -114,18 +114,30 @@ public class ArtsApplication implements CommandLineRunner {
 		resourceService.createResource(resource10);
 
 		// Resource file
-		ResourceFile resourceFile1 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\3__1.jpg", "3__1.jpg", 3);
-		ResourceFile resourceFile2 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\4__2.jpg", "4__2.jpg", 4);
-		ResourceFile resourceFile3 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\6__4.jpg", "6__4.jpg", 6);
-		ResourceFile resourceFile4 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\5__3.jpg", "5__3.jpg", 5);
-		ResourceFile resourceFile5 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\6__5.jpg", "6__5.jpg", 6);
-		ResourceFile resourceFile6 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\8__9.jpg", "8__9.jpg", 8);
-		ResourceFile resourceFile7 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\8__10.jpg", "8__10.jpg",8);
-		ResourceFile resourceFile8 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\9__10.jpg", "9__10.jpg",9);
-		ResourceFile resourceFile9 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\1__11.jpg", "1__11.jpg",1);
-		ResourceFile resourceFile10 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\2__12.jpg", "2__12.jpg",2);
-		ResourceFile resourceFile11 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\7__5.jpg", "7__5.jpg", 7);
-		ResourceFile resourceFile12 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\10__13.jpg", "10__13.jpg",10);
+		ResourceFile resourceFile1 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\3__1.jpg", "3__1.jpg",
+				true, 3);
+		ResourceFile resourceFile2 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\4__2.jpg", "4__2.jpg",
+				true, 4);
+		ResourceFile resourceFile3 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\6__4.jpg", "6__4.jpg",
+				true, 6);
+		ResourceFile resourceFile4 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\5__3.jpg", "5__3.jpg",
+				true, 5);
+		ResourceFile resourceFile5 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\6__5.jpg", "6__5.jpg",
+				true, 6);
+		ResourceFile resourceFile6 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\8__9.jpg", "8__9.jpg",
+				true, 8);
+		ResourceFile resourceFile7 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\8__10.jpg", "8__10.jpg",
+				true, 8);
+		ResourceFile resourceFile8 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\9__10.jpg", "9__10.jpg",
+				true, 9);
+		ResourceFile resourceFile9 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\1__11.jpg", "1__11.jpg",
+				true, 1);
+		ResourceFile resourceFile10 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\2__12.jpg", "2__12.jpg",
+				true, 2);
+		ResourceFile resourceFile11 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\7__5.jpg", "7__5.jpg",
+				true, 7);
+		ResourceFile resourceFile12 = new ResourceFile(".\\arts\\src\\main\\resources\\static\\10__13.jpg",
+				"10__13.jpg", true, 10);
 		resourceFileService.createResourceFile(resourceFile1);
 		resourceFileService.createResourceFile(resourceFile2);
 		resourceFileService.createResourceFile(resourceFile3);

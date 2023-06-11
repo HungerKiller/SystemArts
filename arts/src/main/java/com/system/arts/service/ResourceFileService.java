@@ -1,6 +1,7 @@
 package com.system.arts.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,17 @@ public class ResourceFileService {
 
     public ResourceFile createResourceFile(ResourceFile resourceFile) {
         return resourceFileRepository.save(resourceFile);
+    }
+
+    public ResourceFile updateResourceFile(ResourceFile updatedResourceFile) {
+        Optional<ResourceFile> optionalResourceFile = resourceFileRepository.findById(updatedResourceFile.getId());
+        if (optionalResourceFile.isPresent()) {
+            ResourceFile existingResourceFile = optionalResourceFile.get();
+            existingResourceFile.setIsValid(updatedResourceFile.getIsValid());
+            return resourceFileRepository.save(existingResourceFile);
+        } else {
+            throw new IllegalArgumentException("Resource not found with id " + updatedResourceFile.getId());
+        }
     }
 
     public void deleteResourceFile(int id) {

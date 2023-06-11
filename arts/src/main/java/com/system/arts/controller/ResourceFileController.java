@@ -65,7 +65,7 @@ public class ResourceFileController {
             }
 
             if (!exists) {
-                ResourceFile resourceFile = new ResourceFile(path.toString(), name, id);
+                ResourceFile resourceFile = new ResourceFile(path.toString(), name, false, id);
                 resourceFileService.createResourceFile(resourceFile);
             }
 
@@ -73,6 +73,13 @@ public class ResourceFileController {
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ResourceFile> updateResourceFile(@PathVariable int id, @RequestBody ResourceFile resourceFile) {
+        resourceFile.setId(id);
+        ResourceFile updatedResource = resourceFileService.updateResourceFile(resourceFile);
+        return ResponseEntity.ok(updatedResource);
     }
 
     @DeleteMapping("/{id}")
