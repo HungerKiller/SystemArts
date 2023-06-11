@@ -74,10 +74,10 @@ public class ArtsApplication implements CommandLineRunner {
 		}
 
         // Create users
-        User user1 = new User("user1", "password1", "email1", 20, Role.ADMIN);
-        User user2 = new User("Zhang", "password2", "email2", 20, Role.USER);
-		User user3 = new User("Li", "password3", "email3", 20, Role.USER);
-		User user4 = new User("Wang", "password4", "email4", 20, Role.USER);
+		User user1 = new User("user1", "password1", "email1", 20, 100.1, Role.ADMIN);
+		User user2 = new User("Zhang", "password2", "email2", 20, 100d, Role.USER);
+		User user3 = new User("Li", "password3", "email3", 20, 200d, Role.USER);
+		User user4 = new User("Wang", "password4", "email4", 20, 1000d, Role.USER);
 		userService.createUser(user1);
 		userService.createUser(user2);
 		userService.createUser(user3);

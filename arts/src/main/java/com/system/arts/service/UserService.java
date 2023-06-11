@@ -51,6 +51,7 @@ public class UserService {
             existingUser.setPassword(updatedUser.getPassword());
             existingUser.setEmail(updatedUser.getEmail());
             existingUser.setAge(updatedUser.getAge());
+            existingUser.setMoney(updatedUser.getMoney());
             existingUser.setRole(updatedUser.getRole());
             return userRepository.save(existingUser);
         } else {

@@ -22,6 +22,9 @@ public class User {
     
     @Column(name = "age")
     private Integer age;
+
+    @Column(name = "money")
+    private Double money;
     
     @Column(name = "role", nullable = false)
     private Role role;
@@ -37,11 +40,12 @@ public class User {
     
     public User() {}
     
-    public User(String username, String password, String email, Integer age, Role role) {
+    public User(String username, String password, String email, Integer age, Double money, Role role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.age = age;
+        this.money = money;
         this.role = role;
     }
     
@@ -83,6 +87,14 @@ public class User {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Double getMoney() {
+        return money;
+    }
+
+    public void setMoney(Double money) {
+        this.money = money;
     }
 
     public Role getRole() {
