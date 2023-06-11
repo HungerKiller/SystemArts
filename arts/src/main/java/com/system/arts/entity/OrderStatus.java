@@ -1,9 +1,10 @@
 package com.system.arts.entity;
 
 public enum OrderStatus {
-    ACTIVE,
-    PAYED,
-    CONFIRMED,
-    DELIVERED,
+    PAID,
+    SHIPPED,
+    RETURN_REQUEST,
+    RETURNED,
+    RECEIVED,
     COMPLETED
 }

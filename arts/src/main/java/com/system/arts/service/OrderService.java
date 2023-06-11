@@ -50,7 +50,7 @@ public class OrderService {
             Optional<User> optionalUser = this.userRepository.findById(userId);
             if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
-                Order order = new Order(user, OrderStatus.ACTIVE);
+                Order order = new Order(user, OrderStatus.PAID);
                 order.setIsCart(true);
                 return this.createOrder(order);
             }

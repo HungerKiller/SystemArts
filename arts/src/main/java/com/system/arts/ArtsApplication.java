@@ -180,11 +180,11 @@ public class ArtsApplication implements CommandLineRunner {
 		announcementService.createAnnouncement(announcement3);
 
 		// Order
-		Order order1 = new Order(user1, OrderStatus.ACTIVE);
+		Order order1 = new Order(user1, OrderStatus.RETURNED);
 		order1.setIsCart(true);
 		Order order2 = new Order(user2, OrderStatus.COMPLETED);
 		Order order3 = new Order(user2, OrderStatus.COMPLETED);
-		Order order4 = new Order(user2, OrderStatus.PAYED);
+		Order order4 = new Order(user2, OrderStatus.PAID);
 		this.orderService.createOrder(order1);
 		this.orderService.createOrder(order2);
 		this.orderService.createOrder(order3);
