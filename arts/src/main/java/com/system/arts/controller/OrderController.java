@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.*;
 
 import com.system.arts.dto.OrderDto;
 import com.system.arts.entity.Order;
+import com.system.arts.entity.OrderProduct;
+import com.system.arts.entity.OrderStatus;
+import com.system.arts.entity.User;
 import com.system.arts.service.OrderService;
+import com.system.arts.service.UserService;
 
 @RestController
 @CrossOrigin
@@ -21,6 +25,9 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
 	private ModelMapper modelMapper;
@@ -63,6 +70,19 @@ public class OrderController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Order> updateOrder(@PathVariable int id, @RequestBody Order updatedOrder) {
+        Order order = orderService.getOrderById(id);
+
+        if (updatedOrder.getOrderStatus() == OrderStatus.RETURNED && order.getOrderStatus() != OrderStatus.RETURNED) {
+            double totalPrice = 0;
+            for (OrderProduct product : order.getOrderProducts()) {
+                totalPrice = totalPrice + product.getResource().getPrice() * product.getQuantity();
+            }
+
+            User user = order.getUser();
+            user.setMoney(user.getMoney() + totalPrice);
+            this.userService.updateUser(user);
+        }
+
         updatedOrder.setId(id);
         Order savedOrder = orderService.updateOrder(updatedOrder);
         return new ResponseEntity<>(savedOrder, HttpStatus.OK);
